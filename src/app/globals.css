@@ -1,26 +1,160 @@
 @import "tailwindcss";
 
+
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary-50: #e6f0ff;
+  --primary-100: #cce0ff;
+  --primary: #006cff;
+  --primary-dark: #0052c6;
+  --primary-darker: #003e96;
+  --accent: #6b2ff5;
+  --error: #ff4d4f;
+  --base-100: #f1f3f4;
+  --base-300: #DBDBDB;
+  --text-secondary: #5f6368;
+  --text-primary: #202124;
+  --placeholder-color: #00000080;
+
+  --elev-0: none;
+  --elev-1: 0px 1px 2px rgba(0, 0, 0, 0.15);
+  --elev-2: 0px 2px 4px rgba(0, 0, 0, 0.15);
+  --elev-4: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  --elev-8: 0px 8px 16px rgba(0, 0, 0, 0.15);
+
+  --space-1: 4px;
+  --space-1-5: 6px;
+  --space-2: 8px;
+  --space-2-5: 10px;
+  --space-3: 12px; 
+  --space-3-5: 14px; 
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-9: 36px;
+  --space-10: 40px;
+  --space-11: 44px;
+  --space-12: 48px;
 }
+/* --color-brand/primary-50: var(--primary-50);
+--color-brand/primary-100: var(--primary-100);
+--color-brand/primary-400: var(--primary);
+--color-brand/primary-600: var(--primary-dark);
+--color-brand/primary-700: var(--primary-darker);  
+--color-accent/indigo-400: var(--accent);
+--color-semantic/error: var(--error);
+--color-neutral/100: var(--base-100);
+--color-neutral/600: var(--text-secondary);
+--color-neutral/900: var(--text-primary); */
+
+  /* --shadow-elev-0: var(--elev-0);
+  --shadow-elev-1: var(--elev-1);
+  --shadow-elev-2: var(--elev-2);
+  --shadow-elev-4: var(--elev-4);
+  --shadow-elev-8: var(--elev-8); */
+
+
+    /* --spacing-space-1: var(--space-1);
+  --spacing-space-2: var(--space-2);
+  --spacing-space-3: var(--space-3);
+  --spacing-space-4: var(--space-4);
+  --spacing-space-5: var(--space-5);
+  --spacing-space-6: var(--space-6);
+  --spacing-space-7: var(--space-7);
+  --spacing-space-8: var(--space-8);
+  --spacing-space-9: var(--space-9);
+  --spacing-space-10: var(--space-10);
+  --spacing-space-11: var(--space-11);
+  --spacing-space-12: var(--space-12); */
+
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary-50: var(--primary-50);
+  --color-primary-100: var(--primary-100);
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-darker: var(--primary-darker);
+  --color-accent: var(--accent);
+  --color-error: var(--error);
+  --color-base-100: var(--base-100);
+  --color-base-300: var(--base-300);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-primary: var(--text-primary);
+  --color-placeholder-color: var(--placeholder-color);
+
+  --shadow-0: var(--elev-0);
+  --shadow-1: var(--elev-1);
+  --shadow-2: var(--elev-2);
+  --shadow-4: var(--elev-4);
+  --shadow-8: var(--elev-8);
+
+  --spacing-1: var(--space-1);
+  --spacing-1.5: var(--space-1-5);
+  --spacing-2: var(--space-2);
+  --spacing-2.5: var(--space-2-5);
+  --spacing-3: var(--space-3);
+  --spacing-3.5: var(--space-3-5);
+  --spacing-4: var(--space-4);
+  --spacing-5: var(--space-5);
+  --spacing-6: var(--space-6);
+  --spacing-7: var(--space-7);
+  --spacing-8: var(--space-8);
+  --spacing-9: var(--space-9);
+  --spacing-10: var(--space-10);
+  --spacing-11: var(--space-11);
+  --spacing-12: var(--space-12);
+
+  --font-sf-pro: 'Sf Pro', sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer components {
+  .display-32 {
+    @apply text-[28px] md:text-[32px] font-semibold ;
+  }
+  .h1-28 {
+    @apply text-[24px] md:text-[28px] font-semibold ;
+  }
+  .h2-24 {
+    @apply text-[20px] md:text-[24px] font-semibold ;
+  }
+  .h3-20 {
+    @apply text-[18px] md:text-[20px] font-semibold ;
+  }
+  .body-16 {
+    @apply text-[16px] font-normal ;
+  }
+  .caption-14 {
+    @apply text-[14px] font-medium ;
+  }
+  .nav-conatiner{
+    @apply max-w-[1200px] mx-auto w-full
+  }
+  .main-container {
+    @apply max-w-[748px] mx-auto w-full;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  input,
+  textarea,
+  select {
+    /* @apply border border-neutral/200 focus:ring-2 focus:ring-brand/primary-100 ; */
+    @apply border border-base-100 focus:inset-ring-2 focus:inset-ring-primary-100 outline-none rounded-[4px];
+  }
+}
+
+
+@font-face {
+  font-family: 'Sf Pro';
+  src: url('../assets/fonts/SF-Pro.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Sf Pro';
+  src: url('../assets/fonts/SF-Pro.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
 }
