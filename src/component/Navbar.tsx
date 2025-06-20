@@ -6,8 +6,8 @@ import { Icon } from "@iconify/react";
 const Navbar = () => {
     return (
         <>
-            <nav className='py-4 border-b border-base-300 px-5'>
-                <div className="nav-conatiner">
+            <nav className='py-4 border-b border-neutral-300 px-5'>
+                <div className="nav-container">
                     <div className="flex items-center justify-between">
 
                         <Image src={mapamed_logo} alt="Mapamed Logo" className='max-w-[150px] md:max-w-[175px] lg:max-w-[232px] w-full h-auto' />

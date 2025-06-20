@@ -1,4 +1,5 @@
 import { Icon } from '@iconify/react'
+import Link from 'next/link';
 import React from 'react'
 
 interface PopularCardProps {
@@ -8,12 +9,13 @@ interface PopularCardProps {
 const PopularCard: React.FC<PopularCardProps> = ({ title, icon = 'jam:medical' }) => {
     return (
         <>
-            <button className="cursor-pointer bg-white border border-base-100 shadow-1 py-4 px-5 rounded-[8px] transition-all duration-300 hover:shadow-2 hover:border-2 active:shadow-2  active:border-accent  active:border-1 ">
-                <div className="size-[43px] flex items-center justify-center bg-primary-50 rounded-full mb-2">
-                    <Icon icon={icon} className='size-5 text-primary-darker' />
+            {/* <Link href="/" className="cursor-pointer bg-white border border-neutral-100 shadow-1 py-4 px-5 rounded-3 transition-all duration-300 hover:shadow-2 hover:border-2 active:shadow-2  active:border-accent-indigo-400  active:border-1 "> */}
+            <Link href="/" className="transition-global card cursor-pointer bg-white py-4 px-5 rounded-3 ">
+                <div className="size-[43px] flex items-center justify-center bg-brand-primary-50 rounded-full mb-2">
+                    <Icon icon={icon} className='size-5 text-brand-primary-700' />
                 </div>
                 <p className='body-16 text-black font-semibold text-left'>{title}</p>
-            </button>
+            </Link>
         </>
     )
 }

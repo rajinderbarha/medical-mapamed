@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-
-
 :root {
   --primary-50: #e6f0ff;
   --primary-100: #cce0ff;
@@ -11,10 +9,12 @@
   --accent: #6b2ff5;
   --error: #ff4d4f;
   --base-100: #f1f3f4;
-  --base-300: #DBDBDB;
+  --base-200: #e8e8e8;
+  --base-300: #dbdbdb;
   --text-secondary: #5f6368;
   --text-primary: #202124;
   --placeholder-color: #00000080;
+  --modal-background: rgba(0, 0, 0, 0.5);
 
   --elev-0: none;
   --elev-1: 0px 1px 2px rgba(0, 0, 0, 0.15);
@@ -26,8 +26,8 @@
   --space-1-5: 6px;
   --space-2: 8px;
   --space-2-5: 10px;
-  --space-3: 12px; 
-  --space-3-5: 14px; 
+  --space-3: 12px;
+  --space-3-5: 14px;
   --space-4: 16px;
   --space-5: 20px;
   --space-6: 24px;
@@ -37,22 +37,33 @@
   --space-10: 40px;
   --space-11: 44px;
   --space-12: 48px;
+
+  --radius-0: 0px;
+  --radius-1: 2px;
+  --radius-2: 4px;
+  --radius-3: 8px;
+
+  --transition-duration-default: 150ms;
+  --transition-duration-fast: 200ms;
+  --transition-ease-out: ease-out;
+  --transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-
 @theme inline {
-  --color-primary-50: var(--primary-50);
-  --color-primary-100: var(--primary-100);
-  --color-primary: var(--primary);
-  --color-primary-dark: var(--primary-dark);
-  --color-primary-darker: var(--primary-darker);
-  --color-accent: var(--accent);
-  --color-error: var(--error);
-  --color-base-100: var(--base-100);
-  --color-base-300: var(--base-300);
-  --color-text-secondary: var(--text-secondary);
-  --color-text-primary: var(--text-primary);
+  --color-brand-primary-50: var(--primary-50);
+  --color-brand-primary-100: var(--primary-100);
+  --color-brand-primary-400: var(--primary);
+  --color-brand-primary-600: var(--primary-dark);
+  --color-brand-primary-700: var(--primary-darker);
+  --color-accent-indigo-400: var(--accent);
+  --color-semantic-error: var(--error);
+  --color-neutral-100: var(--base-100);
+  --color-neutral-200: var(--base-200);
+  --color-neutral-300: var(--base-300);
+  --color-neutral-600: var(--text-secondary);
+  --color-neutral-900: var(--text-primary);
   --color-placeholder-color: var(--placeholder-color);
+  --color-modal-background: var(--modal-background);
 
   --shadow-0: var(--elev-0);
   --shadow-1: var(--elev-1);
@@ -76,54 +87,100 @@
   --spacing-11: var(--space-11);
   --spacing-12: var(--space-12);
 
-  --font-sf-pro: 'Sf Pro', system-ui, -apple-system, Roboto;
+  --font-sf-pro: "Sf Pro", system-ui, -apple-system, Roboto;
+
+  --radius-0: var(--radius-0);
+  --radius-1: var(--radius-1);
+  --radius-2: var(--radius-2);
+  --radius-3: var(--radius-3);
+
+  --breakpoint-*: initial;
+  --breakpoint-sm: 375px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+
+  --ease-easing: var(--transition-easing);
+  --transition-duration-default: var(--transition-duration-default);
+  --transition-duration-fast: var(--transition-duration-fast);
+  --ease-out: var(--transition-ease-out);
 }
 
 @layer components {
+  /* Typography Components */
   .display-32 {
-    @apply text-[28px] md:text-[32px] font-semibold ;
+    @apply text-[28px] md:text-[32px] font-semibold leading-[2.75rem];
   }
   .h1-28 {
-    @apply text-[24px] md:text-[28px] font-semibold ;
+    @apply text-[24px] md:text-[28px] font-semibold leading-[2.25rem];
   }
   .h2-24 {
-    @apply text-[20px] md:text-[24px] font-semibold ;
+    @apply text-[20px] md:text-[24px] font-semibold leading-[2.0rem];
   }
   .h3-20 {
-    @apply text-[18px] md:text-[20px] font-semibold ;
+    @apply text-[18px] md:text-[20px] font-semibold leading-[1.75rem];
   }
   .body-16 {
-    @apply text-[16px] font-normal ;
+    @apply text-[16px] font-normal leading-[1.5rem];
   }
   .caption-14 {
-    @apply text-[14px] font-medium ;
+    @apply text-[14px] font-medium leading-[1.25rem];
   }
-  .nav-conatiner{
-    @apply max-w-[1200px] mx-auto w-full
+
+
+  /* Layout Components */
+  .nav-container {
+    @apply max-w-[1200px] mx-auto w-full;
   }
   .main-container {
     @apply max-w-[748px] mx-auto w-full;
   }
-}
+  .card {    
+    /* figma design */
+    /* @apply border border-neutral-100 shadow-1 hover:shadow-2 hover:border-2 active:shadow-2  active:border-accent-indigo-400  active:border-1; */
 
-@layer base {
-  input,
-  textarea,
-  select {
-    @apply border border-base-100 focus:inset-ring-2 focus:inset-ring-primary-100 outline-none rounded-[4px];
+    /* doc design */
+    @apply border border-neutral-200 shadow-1 hover:shadow-2 hover:border-2 hover:border-brand-primary-100 active:shadow-1  active:border-brand-primary-400  active:border-2;
+  }
+  .transition-global {
+    @apply transition-colors duration-default ease-out;
+  }
+  .modal {
+    @apply rounded-3 shadow-4 max-w-[560px] w-full;
   }
 }
 
+@layer base {
+
+  input,
+  textarea,
+  select {
+    @apply border border-neutral-100 focus:inset-ring-2 focus:inset-ring-brand-primary-100 rounded-2 outline-none;
+  }
+  input,
+  select {
+    @apply h-[48px];
+  }
+  button {
+    @apply cursor-pointer active:brightness-80 disabled:brightness-80;
+  }
+  svg {
+    @apply w-full h-full;
+  }
+  img {
+    @apply w-full;
+  }
+}
 
 @font-face {
-  font-family: 'Sf Pro';
-  src: url('../assets/fonts/SF-Pro.ttf') format('truetype');
+  font-family: "Sf Pro";
+  src: url("../assets/fonts/SF-Pro.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Sf Pro';
-  src: url('../assets/fonts/SF-Pro.ttf') format('truetype');
+  font-family: "Sf Pro";
+  src: url("../assets/fonts/SF-Pro.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
 }
