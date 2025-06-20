@@ -38,36 +38,6 @@
   --space-11: 44px;
   --space-12: 48px;
 }
-/* --color-brand/primary-50: var(--primary-50);
---color-brand/primary-100: var(--primary-100);
---color-brand/primary-400: var(--primary);
---color-brand/primary-600: var(--primary-dark);
---color-brand/primary-700: var(--primary-darker);  
---color-accent/indigo-400: var(--accent);
---color-semantic/error: var(--error);
---color-neutral/100: var(--base-100);
---color-neutral/600: var(--text-secondary);
---color-neutral/900: var(--text-primary); */
-
-  /* --shadow-elev-0: var(--elev-0);
-  --shadow-elev-1: var(--elev-1);
-  --shadow-elev-2: var(--elev-2);
-  --shadow-elev-4: var(--elev-4);
-  --shadow-elev-8: var(--elev-8); */
-
-
-    /* --spacing-space-1: var(--space-1);
-  --spacing-space-2: var(--space-2);
-  --spacing-space-3: var(--space-3);
-  --spacing-space-4: var(--space-4);
-  --spacing-space-5: var(--space-5);
-  --spacing-space-6: var(--space-6);
-  --spacing-space-7: var(--space-7);
-  --spacing-space-8: var(--space-8);
-  --spacing-space-9: var(--space-9);
-  --spacing-space-10: var(--space-10);
-  --spacing-space-11: var(--space-11);
-  --spacing-space-12: var(--space-12); */
 
 
 @theme inline {
@@ -106,7 +76,7 @@
   --spacing-11: var(--space-11);
   --spacing-12: var(--space-12);
 
-  --font-sf-pro: 'Sf Pro', sans-serif;
+  --font-sf-pro: 'Sf Pro', system-ui, -apple-system, Roboto;
 }
 
 @layer components {
@@ -140,7 +110,6 @@
   input,
   textarea,
   select {
-    /* @apply border border-neutral/200 focus:ring-2 focus:ring-brand/primary-100 ; */
     @apply border border-base-100 focus:inset-ring-2 focus:inset-ring-primary-100 outline-none rounded-[4px];
   }
 }
