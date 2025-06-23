@@ -18,13 +18,13 @@ const Button: React.FC<ButtonProps> = ({
     type = 'button',
     disabled = false, }) => {
 
-    const baseStyles = 'curson-pointer inline-flex items-center justify-center transition-all duration-200 focus:outline-none';
+    const baseStyles = 'curson-pointer inline-flex items-center justify-center transition-global rounded-2';
 
     const variantStyles = {
-        primary: 'h-12 px-6 bg-primary text-white body-16 font-semibold',
-        secondary: 'h-12 px-6 bg-white text-primary body-16 font-semibold border border-brand/primary-700',
-        ghost: 'h-10 px-4 bg-transparent text-primary body-16 font-semibold',
-        destructive: 'h-12 px-6 bg-error text-white body-16 font-semibold',
+        primary: 'h-12 px-6 bg-brand-primary-400 text-white body-16 font-semibold hover:bg-brand-primary-600',
+        secondary: 'h-12 px-6 bg-white text-brand-primary-400 body-16 font-semibold border border-brand-primary-700',
+        ghost: 'h-10 px-4 bg-transparent text-brand-primary-400 body-16 font-semibold',
+        destructive: 'h-12 px-6 bg-semantic-error text-white body-16 font-semibold',
         'icon-only': 'size-10 bg-transparent p-0',
     };
 
@@ -37,7 +37,7 @@ const Button: React.FC<ButtonProps> = ({
                 onClick={onClick}
                 disabled={disabled}
             >
-                {icon && variant === 'icon-only' ? icon : children}
+                {icon && variant === 'icon-only' ? <div className="size-6">{icon}</div> : children}
             </button>
         </>
     )
