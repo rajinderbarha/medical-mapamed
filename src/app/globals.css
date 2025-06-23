@@ -129,7 +129,7 @@
 
 
   /* Layout Components */
-  .nav-container {
+  .secondary-container {
     @apply max-w-[1200px] mx-auto w-full;
   }
   .main-container {
@@ -141,6 +141,13 @@
 
     /* doc design */
     @apply border border-neutral-200 shadow-1 hover:shadow-2 hover:border-2 hover:border-brand-primary-100 active:shadow-1  active:border-brand-primary-400  active:border-2;
+  }
+  .card.active {    
+    /* figma design */
+    /* @applyshadow-2 border-accent-indigo-400 border-1; */
+
+    /* doc design */
+    @apply shadow-1 border-brand-primary-400 border-2;
   }
   .transition-global {
     @apply transition-colors duration-default ease-out;
@@ -169,6 +176,14 @@
   }
   img {
     @apply w-full;
+  }
+  select{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('../assets/images/arrow.svg');
+    background-repeat: no-repeat;
+    
   }
 }
 

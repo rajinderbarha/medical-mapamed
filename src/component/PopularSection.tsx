@@ -4,7 +4,7 @@ import React from 'react'
 const PopularSection = () => {
     return (
         <>
-            <div className="px-5 mt-[18px] md:mt-[30px]">
+            <section className="px-5 mt-[18px] md:mt-[30px]">
                 <div className="main-container">
                     <div className="bg-white rounded-3 border border-neutral-100 shadow-4">
                         <div className="pt-[15px] md:pt-[23px] px-5 md:px-[25px] pb-[13px] md:pb-[19px] border-b border-neutral-300">
@@ -22,7 +22,7 @@ const PopularSection = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </>
     )
 }
