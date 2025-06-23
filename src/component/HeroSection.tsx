@@ -28,7 +28,7 @@ const HeroSection = () => {
 
     return (
         <>
-           <section className="px-5 pt-[55px]">
+            <section className="px-5 pt-[55px]">
                 <div className="main-container">
                     <div className="space-y-2.5 text-center mb-[19px]">
                         <h1 className='display-32 text-black '>Găsește furnizori de servicii medicale în apropierea ta</h1>
