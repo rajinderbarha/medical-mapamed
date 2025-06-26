@@ -2,8 +2,14 @@ import Image from 'next/image'
 import React from 'react'
 import doctor_image from '@/assets/images/doctor_image.png'
 import { InlineIcon } from '@iconify/react'
+import { Hospital } from '@/types/types';
 
-const ResultCard = () => {
+interface ResultCardProps {
+    hospital: Hospital;
+}
+const ResultCard: React.FC<ResultCardProps> = ({ hospital }) => {
+    const doctor = hospital.doctors?.[0];
+    const procedure = hospital.procedures?.[0];
     return (
         <>
             <div className="card bg-white rounded-3 py-5 px-3 md:py-7 md:px-4">
@@ -11,8 +17,12 @@ const ResultCard = () => {
                     <div className="flex items-start gap-4">
                         <Image src={doctor_image} alt="Doctor" className='size-[50px] md:size-[61px] rounded-full' />
                         <div className="space-y-1.5">
-                            <h3 className="h3-20 text-black font-semibold">Dr. Ionescu Maria</h3>
-                            <p className="caption-14 text-[#4C5566]">Cardiolog • Centrul Medical Central</p>
+                            <h3 className="h3-20 text-black font-semibold">
+                                {doctor?.name ?? "Doctor Necunoscut"}
+                            </h3>
+                            <p className="caption-14 text-[#4C5566]">
+                                {doctor?.specialty ?? "Specialitate"} • {hospital.name}
+                            </p>
                             <div className="flex items-center gap-1.5">
                                 <div className="text-[#F6CA10] flex items-center gap-px">
                                     <InlineIcon icon="material-symbols:star-rounded" className='size-4' />
@@ -32,7 +42,7 @@ const ResultCard = () => {
                     <div className="space-y-2.5 w-full md:w-auto">
                         {/* <Button variant='primary'>Programare</Button> */}
                         <button className='caption-14 text-white rounded-3 bg-[#447BF7] px-2.5 py-2 w-full md:w-auto'>Programare</button>
-                        <p className='text-[12px] text-neutral-600'>Următorul: Astăzi</p>                    
+                        <p className='text-[12px] text-neutral-600'>Următorul: Astăzi</p>
                     </div>
                 </div>
             </div>

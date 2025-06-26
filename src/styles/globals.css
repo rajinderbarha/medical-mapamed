@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import 'mapbox-gl/dist/mapbox-gl.css';
 
 :root {
   --primary-50: #e6f0ff;
@@ -107,22 +108,28 @@
 }
 
 @layer components {
+
   /* Typography Components */
   .display-32 {
     @apply text-[28px] md:text-[32px] font-semibold leading-[2.75rem];
   }
+
   .h1-28 {
     @apply text-[24px] md:text-[28px] font-semibold leading-[2.25rem];
   }
+
   .h2-24 {
     @apply text-[20px] md:text-[24px] font-semibold leading-[2.0rem];
   }
+
   .h3-20 {
     @apply text-[18px] md:text-[20px] font-semibold leading-[1.75rem];
   }
+
   .body-16 {
     @apply text-[16px] font-normal leading-[1.5rem];
   }
+
   .caption-14 {
     @apply text-[14px] font-medium leading-[1.25rem];
   }
@@ -132,26 +139,31 @@
   .secondary-container {
     @apply max-w-[1200px] mx-auto w-full;
   }
+
   .main-container {
     @apply max-w-[748px] mx-auto w-full;
   }
-  .card {    
+
+  .card {
     /* figma design */
     /* @apply border border-neutral-100 shadow-1 hover:shadow-2 hover:border-2 active:shadow-2  active:border-accent-indigo-400  active:border-1; */
 
     /* doc design */
-    @apply border border-neutral-200 shadow-1 hover:shadow-2 hover:border-2 hover:border-brand-primary-100 active:shadow-1  active:border-brand-primary-400  active:border-2;
+    @apply border border-neutral-200 shadow-1 hover:shadow-2 hover:border-2 hover:border-brand-primary-100 active:shadow-1 active:border-brand-primary-400 active:border-2;
   }
-  .card.active {    
+
+  .card.active {
     /* figma design */
     /* @applyshadow-2 border-accent-indigo-400 border-1; */
 
     /* doc design */
     @apply shadow-1 border-brand-primary-400 border-2;
   }
+
   .transition-global {
     @apply transition-colors duration-default ease-out;
   }
+
   .modal {
     @apply rounded-3 shadow-4 max-w-[560px] w-full;
   }
@@ -164,26 +176,31 @@
   select {
     @apply border border-neutral-100 focus:inset-ring-2 focus:inset-ring-brand-primary-100 rounded-2 outline-none;
   }
+
   input,
   select {
     @apply h-[48px];
   }
+
   button {
     @apply cursor-pointer active:brightness-80 disabled:brightness-80;
   }
+
   svg {
     @apply w-full h-full;
   }
+
   img {
     @apply w-full;
   }
-  select{
+
+  select {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     background-image: url('../assets/images/arrow.svg');
     background-repeat: no-repeat;
-    
+
   }
 }
 
@@ -193,6 +210,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 @font-face {
   font-family: "Sf Pro";
   src: url("../assets/fonts/SF-Pro.ttf") format("truetype");

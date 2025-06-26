@@ -2,10 +2,12 @@
 
 import mapboxgl from "mapbox-gl";
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect, useRef } from "react";
-import { fakeHospitals } from "@/lib/mapData";
 import { useRouter } from "next/navigation";
+import "mapbox-gl/dist/mapbox-gl.css";
+import { Hospital } from "@/types/types";
+import { useApp } from "@/context/AppContext";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN!;
 
@@ -13,18 +15,42 @@ const MapSection = () => {
     const mapContainer = useRef<HTMLDivElement>(null);
     const map = useRef<mapboxgl.Map | null>(null);
     const router = useRouter();
+    const { location } = useApp();
+    const [hospitals, setHospitals] = useState<Hospital[]>([]);
 
     useEffect(() => {
-        if (map.current) return; // initialize map only once
+        if (map.current) return;
 
         map.current = new mapboxgl.Map({
             container: mapContainer.current!,
             style: "mapbox://styles/mapbox/light-v11",
-            center: [26.1025, 44.4268], // Bucharest center
+            center: [26.1025, 44.4268],
             zoom: 11,
         });
+    }, []);
 
-        fakeHospitals.forEach((hospital) => {
+    useEffect(() => {
+        if (!location) return;
+
+        const fetchNearbyHospitals = async () => {
+            try {
+                const res = await fetch(
+                    `${process.env.NEXT_PUBLIC_API_URL}/api/hospitals/nearby?lat=${location.latitude}&lon=${location.longitude}&radius=5`
+                );
+                const data = await res.json();
+                setHospitals(data);
+            } catch (err) {
+                console.error("Failed to fetch nearby hospitals", err);
+            }
+        };
+
+        fetchNearbyHospitals();
+    }, [location]);
+
+    useEffect(() => {
+        if (!map.current || !hospitals.length) return;
+
+        hospitals.forEach((hospital) => {
             const el = document.createElement("div");
             el.className = "marker";
             el.style.backgroundColor = "#2C69F7";
@@ -41,9 +67,7 @@ const MapSection = () => {
                 .setPopup(new mapboxgl.Popup().setText(hospital.name))
                 .addTo(map.current!);
         });
-
-        return () => map.current?.remove();
-    }, [router]);
+    }, [hospitals, router]);
 
     return (
         <>
