@@ -1,9 +1,10 @@
 "use client";
 import { sendGAEvent } from "@/lib/analytics";
+type GAEventParams = Record<string, string | number | boolean | undefined>;
 
 type Props = {
     eventName: string;
-    eventParams?: Record<string, any>;
+    eventParams?: GAEventParams;
     children: React.ReactNode;
 };
 

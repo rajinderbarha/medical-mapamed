@@ -217,3 +217,14 @@
   font-weight: 600;
   font-style: normal;
 }
+
+.card-static {
+  @apply border border-neutral-200 shadow-1 bg-white rounded-3;
+}
+
+.card {
+  /* figma design */
+  /* @apply border border-neutral-100 shadow-1 hover:shadow-2 hover:border-2 active:shadow-2  active:border-accent-indigo-400  active:border-1; */
+  /* doc design */
+  @apply border border-neutral-200 shadow-1 hover:shadow-2 hover:border-2 hover:border-brand-primary-100 active:shadow-1 active:border-brand-primary-400 active:border-2;
+}

@@ -7,7 +7,11 @@ interface PopularCardProps {
     icon?: string;
     id?: number;
 }
-const PopularCard: React.FC<PopularCardProps> = ({ title = '', icon = 'jam:medical', id }) => {
+const PopularCard: React.FC<PopularCardProps> = ({
+    title = '',
+    icon = 'jam:medical',
+    id
+}) => {
     const searchQuery = encodeURIComponent(title);
 
     return (
@@ -17,10 +21,10 @@ const PopularCard: React.FC<PopularCardProps> = ({ title = '', icon = 'jam:medic
                 href={`/search?q=${searchQuery}`}
                 className="transition-global card cursor-pointer bg-white py-4 px-5 rounded-3 "
             >
-                <div className="size-[43px] flex items-center justify-center bg-brand-primary-50 rounded-full mb-2">
+                <div  className="size-[43px] flex items-center justify-center bg-brand-primary-50 rounded-full mb-2">
                     <Icon icon={icon} className='size-5 text-brand-primary-700' />
                 </div>
-                <p className='body-16 text-black font-semibold text-left'>{title}</p>
+                <p  key={id} className='body-16 text-black font-semibold text-left'>{title}</p>
             </Link>
         </>
     )

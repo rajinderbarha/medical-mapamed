@@ -1,6 +1,6 @@
 "use client"
 import { useApp } from '@/context/AppContext';
-import { sendGAEvent } from '@/lib/analytics';
+// import { sendGAEvent } from '@/lib/analytics';
 import { Icon } from '@iconify/react'
 import React from 'react'
 

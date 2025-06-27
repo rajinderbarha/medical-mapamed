@@ -1,4 +1,5 @@
 export interface Procedure {
+    description: string;
     id: number;
     name: string;
     cost: number;
@@ -7,6 +8,10 @@ export interface Procedure {
 }
 
 export interface Doctor {
+    specialization: string | null | undefined;
+    phone: string;
+    email: string;
+    description: string;
     id: number;
     name: string;
     specialty: string;
@@ -15,6 +20,8 @@ export interface Doctor {
 }
 
 export interface Hospital {
+    email: string;
+    phone: string;
     id: number;
     name: string;
     address: string;

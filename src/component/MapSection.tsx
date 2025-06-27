@@ -1,12 +1,10 @@
 "use client";
 
 import mapboxgl from "mapbox-gl";
-import Link from 'next/link'
-import React, { useState } from 'react'
-import { useEffect, useRef } from "react";
+import Link from 'next/link';
+import React, { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { Hospital } from "@/types/types";
 import { useApp } from "@/context/AppContext";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN!;
@@ -15,41 +13,28 @@ const MapSection = () => {
     const mapContainer = useRef<HTMLDivElement>(null);
     const map = useRef<mapboxgl.Map | null>(null);
     const router = useRouter();
-    const { location } = useApp();
-    const [hospitals, setHospitals] = useState<Hospital[]>([]);
+    const { location, hospitals } = useApp();
+    // const [popup, setPopup] = useState<mapboxgl.Popup | null>(null);
 
     useEffect(() => {
         if (map.current) return;
-
         map.current = new mapboxgl.Map({
             container: mapContainer.current!,
             style: "mapbox://styles/mapbox/light-v11",
-            center: [26.1025, 44.4268],
+            center: [location!.longitude, location!.latitude],
             zoom: 11,
         });
     }, []);
 
     useEffect(() => {
-        if (!location) return;
-
-        const fetchNearbyHospitals = async () => {
-            try {
-                const res = await fetch(
-                    `${process.env.NEXT_PUBLIC_API_URL}/api/hospitals/nearby?lat=${location.latitude}&lon=${location.longitude}&radius=5`
-                );
-                const data = await res.json();
-                setHospitals(data);
-            } catch (err) {
-                console.error("Failed to fetch nearby hospitals", err);
-            }
-        };
-
-        fetchNearbyHospitals();
+        if (!map.current) return;
+        map.current.setCenter([location!.longitude, location!.latitude]);
     }, [location]);
 
     useEffect(() => {
         if (!map.current || !hospitals.length) return;
 
+        const markers: mapboxgl.Marker[] = [];
         hospitals.forEach((hospital) => {
             const el = document.createElement("div");
             el.className = "marker";
@@ -57,17 +42,62 @@ const MapSection = () => {
             el.style.width = "16px";
             el.style.height = "16px";
             el.style.borderRadius = "50%";
+            el.style.cursor = "pointer"; // hover cursor pointer ✅
 
-            el.addEventListener("click", () => {
-                router.push(`/search?cabinet=${hospital.id}`);
-            });
+            const popupHTML = `
+                              <div style="
+                                min-width: 220px;
+                                font-family: sans-serif;
+                                padding: 10px;
+                              ">
+                                <strong>${hospital.name}</strong><br/>
+                                <p style="margin: 5px 0;">${hospital.address}</p>
+                                <a 
+                                  id="popup-btn-${hospital.id}" 
+                                  style="
+                                    color: #2C69F7;
+                                    font-size: 14px;
+                                    text-decoration: underline;
+                                    cursor: pointer;
+                                    display: inline-block;
+                                    margin-top: 5px;
+                                  "
+                                >View</a>
+                              </div>
+                            `;
 
-            new mapboxgl.Marker(el)
+            const popup = new mapboxgl.Popup({
+                offset: 15,
+                closeButton: true, // default true; adds top-right (×) close
+                closeOnClick: false,
+            }).setHTML(popupHTML);
+
+            const marker = new mapboxgl.Marker(el)
                 .setLngLat([hospital.longitude, hospital.latitude])
-                .setPopup(new mapboxgl.Popup().setText(hospital.name))
+                .setPopup(popup)
                 .addTo(map.current!);
+
+            markers.push(marker);
+
+            marker.getElement().addEventListener("click", () => {
+                setTimeout(() => {
+                    const btn = document.getElementById(`popup-btn-${hospital.id}`);
+                    if (btn) {
+                        btn.addEventListener("click", () => {
+                            router.push(`/search?q=${encodeURIComponent(hospital.name)}`);
+                        });
+                    }
+                }, 100);
+            });
         });
-    }, [hospitals, router]);
+
+
+        return () => {
+            markers.forEach(marker => marker.remove());
+            // popup?.remove();
+        };
+    }, [hospitals]);
+
 
     return (
         <>
@@ -79,12 +109,6 @@ const MapSection = () => {
                             <Link href="/" className='body-16 text-black font-semibold text-right'>Vezi harta completă</Link>
                         </div>
                         <div className="py-[13px] md:py-[19px] px-5 md:px-[25px] ">
-                            {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193597.01223053955!2d-74.14465397140326!3d40.6970238350613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1750393960695!5m2!1sen!2sin"
-                                className="w-full h-[350px] md:h-[450px] rounded-3 "
-                                allowFullScreen={true}
-                                loading="lazy"
-                                referrerPolicy="no-referrer-when-downgrade">
-                            </iframe> */}
                             <div ref={mapContainer} className="w-full h-[350px] sm:h-[450px] rounded-3" />
                         </div>
                     </div>

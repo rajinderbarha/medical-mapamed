@@ -1,6 +1,7 @@
 import PopularCard from '@/common/PopularCard'
 import React from 'react'
 import { fetchPopularProcedures } from "@/lib/api";
+import { Procedure } from '@/types/types';
 
 const iconMap: Record<string, string> = {
     "medic": "jam:medical",
@@ -14,7 +15,7 @@ const iconMap: Record<string, string> = {
 const PopularSection = async () => {
     const popularProcedures = await fetchPopularProcedures();
 
-    console.log(popularProcedures);
+    // console.log(popularProcedures);
     return (
         <>
             <section className="px-5 mt-[18px] md:mt-[30px]">
@@ -25,7 +26,7 @@ const PopularSection = async () => {
                         </div>
                         <div className="pt-[13px] md:pt-[19px] px-5 md:px-[25px] pb-10">
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-[18px]">
-                                {popularProcedures?.data?.map((procedure: any) => {
+                                {popularProcedures?.data?.map((procedure: Procedure) => {
                                     const title = procedure.name;
                                     const normalized = title.toLowerCase();
                                     const icon = iconMap[normalized] || 'jam:medical'; // fallback
